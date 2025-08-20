@@ -158,8 +158,8 @@
 
 .newAnime .titleSection h2 {
   font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--secondary);
+  font-weight: 700;
+  color: var(--tertiary);
   cursor: default;
   width: 100%;
   padding: 1rem;
@@ -180,6 +180,12 @@
   margin: 0 auto;
   position: relative;
   cursor: pointer;
+  border-radius: 1rem;
+  transition: .4s ease-in-out;
+}
+
+.newAnimeWrapper .boxWrapper:hover {
+  scale: 1.01;
 }
 
 .newAnime .boxWrapper .thumbnailAnime a img {
@@ -187,27 +193,48 @@
   transition: .3s ease-in-out;
   width: 100%;
   margin: 0 auto;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .newAnime .boxWrapper .titleSection {
   font-size: .7rem;
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .newAnime .boxWrapper .titleSection h4 a {
+  width: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, .1));
   font-weight: 700;
-  color: var(--button);
+  color: var(--bg);
   position: absolute;
   padding: 1rem;
   margin-top: 1rem;
   left: 0;
-  bottom: -10%;
+  bottom: 2%;
   border-radius: 0 0 1rem 1rem;
-  /* display: none; */
+}
+
+.newAnime .seeMore {
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.newAnime .seeMore .seeMoreBtn {
+  margin: 0 auto;
+  margin-left: 44%;
+  padding: .8rem;
+  color: var(--primary);
+  transition: .3s ease-in-out;
+  font-weight: 600;
+  border-radius: 1rem;
+  background-color: var(--button);
+}
+
+.newAnime .seeMore .seeMoreBtn:hover {
+  background-color: var(--tertiary);
+  color: var(--button);
 }
 
 

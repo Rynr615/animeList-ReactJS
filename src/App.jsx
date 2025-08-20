@@ -3,7 +3,7 @@ import './App.css'
 import { faFireFlameCurved, faThumbsUp, faList } from '@fortawesome/free-solid-svg-icons'
 import { scrollFunction } from './js/main'
 import { useEffect, useState } from 'react'
-import { getNewAnime } from './js/api'
+import { getNewAnime, getPopularAnime } from './js/api'
 
 function App() {
 
@@ -57,6 +57,7 @@ function Body() {
     <div className="container">
       <SearchBar></SearchBar>
       <NewAnime></NewAnime>
+      <PopularAnime></PopularAnime>
     </div>
     </>
   )
@@ -104,8 +105,6 @@ function NewAnime() {
     })
   }, [])
 
-  console.log(newAnime);
-
   return (
     <>
       <div className="newAnime">
@@ -127,28 +126,7 @@ function NewAnimeList({newAnime}) {
 
   return newAnime.map((anime, i) => {
     return (
-      <div key={i} className="boxWrapper">
-        {/* <div className="titleSection">
-          <h4>
-            <a href="">
-              {anime.title}
-            </a>
-          </h4>
-        </div>
-        <div className="genresAnime">
-          {anime.genres.map((genre, idx) => {
-            return (
-              <li key={idx}>
-                <a href="">
-                  {genre.name}
-                </a>
-              </li>
-            )
-          })}
-        </div>
-        <div className="thumbnailAnime">
-            <img src={anime.images.jpg.image_url} alt="" />
-        </div> */}
+        <div key={i} className="boxWrapper">
         <div className="titleSection">
           <h4>
             <a id="animeTitle" href="">
@@ -164,6 +142,18 @@ function NewAnimeList({newAnime}) {
       </div>
       )
   })
+}
+
+function PopularAnime() {
+  const [popularAnime, setpopularAnime] = useState([]);
+
+  useEffect(() => {
+    getPopularAnime().then((result) => {
+      setpopularAnime(result);
+    })
+  }, [])
+
+  console.log(popularAnime)
 }
 
 export default App
