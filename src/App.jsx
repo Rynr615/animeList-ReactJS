@@ -3,7 +3,7 @@ import './App.css'
 import { faFireFlameCurved, faThumbsUp, faList } from '@fortawesome/free-solid-svg-icons'
 import { scrollFunction } from './js/main'
 import { useEffect, useState } from 'react'
-import { getNewAnime, getPopularAnime } from './js/api'
+import { getNewAnime, getPopularAnime, getRecommendationAnime } from './js/api'
 
 function App() {
 
@@ -58,6 +58,7 @@ function Body() {
       <SearchBar></SearchBar>
       <NewAnime></NewAnime>
       <PopularAnime></PopularAnime>
+      <RecommendationAnime></RecommendationAnime>
     </div>
     </>
   )
@@ -107,11 +108,11 @@ function NewAnime() {
 
   return (
     <>
-      <div className="newAnime">
+      <div className="anime">
         <div className="titleSection">
           <h2>New Anime</h2>
         </div>
-        <div className="newAnimeWrapper">
+        <div className="animeWrapper">
           <NewAnimeList newAnime={newAnime} />
         </div>
         <div className="seeMore">
@@ -145,15 +146,62 @@ function NewAnimeList({newAnime}) {
 }
 
 function PopularAnime() {
-  const [popularAnime, setpopularAnime] = useState([]);
+  const [popularAnime, setPopularAnime] = useState([]);
 
   useEffect(() => {
     getPopularAnime().then((result) => {
-      setpopularAnime(result);
+      setPopularAnime(result);
     })
   }, [])
 
-  console.log(popularAnime)
+  return (
+    <>
+      <div className="anime">
+        <div className="titleSection">
+          <h2>Popular Anime</h2>
+        </div>
+        <div className="animeWrapper">
+          <PopularAnimeList popularAnime={popularAnime} />
+        </div>
+        <div className="seeMore">
+          <a href="" className="seeMoreBtn">See More</a>
+        </div>
+      </div>
+    </>
+  )
+}
+
+function PopularAnimeList({popularAnime}) {
+  return popularAnime.map((anime, i) => {
+    return (
+        <div key={i} className="boxWrapper">
+        <div className="titleSection">
+          <h4>
+            <a id="animeTitle" href="">
+              {anime.title}
+            </a>
+          </h4>
+        </div>
+        <div className="thumbnailAnime">
+          <a href="">
+            <img src={anime.images.jpg.image_url} alt={anime.title} />
+          </a>
+        </div>
+      </div>
+      )
+  })
+}
+
+function RecommendationAnime() {
+  const [RecommendationAnime, setRecommendationAnime] = useState([]);
+
+  useEffect(() => {
+    getRecommendationAnime().then((result) => {
+      setRecommendationAnime(result);
+    })
+  }, [])
+
+  console.log(RecommendationAnime)
 }
 
 export default App
