@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './App.css'
-import { faFireFlameCurved, faThumbsUp, faList } from '@fortawesome/free-solid-svg-icons'
+import { faFireFlameCurved, faThumbsUp, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { scrollFunction } from './js/main'
 import { useEffect, useState } from 'react'
-import { getNewAnime, getPopularAnime, getRecommendationAnime } from './js/api'
+import { getNewAnime, getPopularAnime, getRecommendationAnime, getFavoriteAnime } from './js/api'
 
 function App() {
 
@@ -59,6 +59,7 @@ function Body() {
       <NewAnime></NewAnime>
       <PopularAnime></PopularAnime>
       <RecommendationAnime></RecommendationAnime>
+      <FavoriteAnime></FavoriteAnime>
     </div>
     </>
   )
@@ -86,9 +87,9 @@ function SearchBar() {
           </a>
           <a href="">
             <i>
-              <FontAwesomeIcon icon={faList} />
+              <FontAwesomeIcon icon={faHeart} />
             </i>
-            Genre
+            Most Favorite
           </a>
         </div>
       </div>
@@ -193,15 +194,106 @@ function PopularAnimeList({popularAnime}) {
 }
 
 function RecommendationAnime() {
-  const [RecommendationAnime, setRecommendationAnime] = useState([]);
+  const [recommendationAnime, setRecommendationAnime] = useState([]);
 
   useEffect(() => {
     getRecommendationAnime().then((result) => {
       setRecommendationAnime(result);
     })
-  }, [])
+  }, []);
 
-  console.log(RecommendationAnime)
+  return (
+    <>
+      <div className="anime">
+        <div className="titleSection">
+          <h2>Recommendations Anime</h2>
+        </div>
+        <div className="animeWrapper">
+          <RecommendationAnimeList recommendationAnime={recommendationAnime}></RecommendationAnimeList>
+        </div>
+        <div className="seeMore">
+          <a href="" className="seeMoreBtn">See More</a>
+        </div>
+      </div>
+    </>
+  )
 }
+
+function RecommendationAnimeList({recommendationAnime}) {
+  return recommendationAnime.slice(0, 6).map((anime, i) => {
+    return (
+      <div key={i} className="recAnime">
+        {anime.entry.map((entry, idx) => {
+          return (
+          <div key={idx} className="boxWrapper">
+            <div className="titleSection">
+              <h4>
+                <a href="">
+                  {entry.title}
+                </a>
+              </h4>
+            </div>
+            <div className="thumbnailAnime">
+              <a href="">
+                <img src={entry.images.jpg.image_url} alt={entry.title} />
+              </a>
+            </div>
+          </div>
+          )
+        })}
+      </div>
+    )
+  })
+}
+
+function FavoriteAnime() {
+  const [favoriteAnime, setFavoriteAnime] = useState([]);
+
+  useEffect(() => {
+    getFavoriteAnime().then((result) => {
+      setFavoriteAnime(result);
+    })
+  }, []);
+
+  return (
+    <>
+      <div className="anime favoriteAnime">
+        <div className="titleSection">
+          <h2>Favorite Anime</h2>
+        </div>
+        <div className="animeWrapper">
+          <FavoriteAnimeList favoriteAnime={favoriteAnime}></FavoriteAnimeList>
+        </div>
+        <div className="seeMore">
+          <a href="" className="seeMoreBtn">See More</a>
+        </div>
+      </div>
+    </>
+  )
+  
+}
+
+function FavoriteAnimeList({favoriteAnime}) {
+  return favoriteAnime.map((anime, i) => {
+    return (
+        <div key={i} className="boxWrapper">
+        <div className="titleSection">
+          <h4>
+            <a id="animeTitle" href="">
+              {anime.title}
+            </a>
+          </h4>
+        </div>
+        <div className="thumbnailAnime">
+          <a href="">
+            <img src={anime.images.jpg.image_url} alt={anime.title} />
+          </a>
+        </div>
+      </div>
+      )
+  })
+}
+
+
 
 export default App

@@ -146,7 +146,7 @@
 .anime {
   height: 100vh;
   width: 100%;
-  margin-left: 2rem;
+  margin-left: 2.7rem;
   margin-bottom: -15%;
 }
 
@@ -182,6 +182,8 @@
   cursor: pointer;
   border-radius: 1rem;
   transition: .4s ease-in-out;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .animeWrapper .boxWrapper:hover {
@@ -237,6 +239,10 @@
 .anime .seeMore .seeMoreBtn:hover {
   background-color: var(--tertiary);
   color: var(--button);
+}
+
+.favoriteAnime {
+  margin-top: 18rem;
 }
 
 

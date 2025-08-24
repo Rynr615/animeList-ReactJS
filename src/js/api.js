@@ -13,6 +13,11 @@ export const getPopularAnime = async () => {
 }
 
 export const getRecommendationAnime = async () => {
-    const recommendationAnime = await axios.get(`${baseUrl}recommendations/anime?limit=5`);
+    const recommendationAnime = await axios.get(`${baseUrl}recommendations/anime`);
     return recommendationAnime.data.data;
+}
+
+export const getFavoriteAnime = async () => {
+    const favoriteAnime = await axios.get(`${baseUrl}top/anime?filter=favorite&limit=6`);
+    return favoriteAnime.data.data;
 }
